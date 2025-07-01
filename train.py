@@ -24,7 +24,7 @@ real_label = 1
 fake_label = 0
 
 # 设置设备
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda' if torch.cuda.is_available() else 'mps') # Mac 平台使用mps加速
 
 def main(): 
 
@@ -34,8 +34,8 @@ def main():
 
     # 定义损失函数和优化器
     criterion = nn.BCELoss()
-    optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, beta2))
-    optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, beta2))
+    optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, beta2),weight_decay=1e-5)
+    optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, beta2),weight_decay=1e-6) # 更弱的正则化
 
     # 训练过程
     losses = [[], []]

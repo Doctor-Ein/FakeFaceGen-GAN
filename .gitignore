@@ -1,3 +1,5 @@
 img/
 docs/
 .DS_Store
+Generate*/
+__pycache__/
