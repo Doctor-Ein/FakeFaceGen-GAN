@@ -1,10 +1,8 @@
 import os
-import numpy as np
 from skimage import io, transform
-import torch
 from torch.utils.data import Dataset, DataLoader
 
-img_dim = 128
+img_dim = 128 # 啊啊啊啊啊
 PATH = "img/processed/"
 
 class DataGenerater(Dataset):
@@ -14,7 +12,7 @@ class DataGenerater(Dataset):
         1. 使用 os.path.join 安全拼接路径
         2. 添加扩展名过滤（仅支持 .png/.jpg/.jpeg）
         """
-        self.dir = path.rstrip('/')  # 移除末尾可能存在的斜杠
+        self.dir = path.rstrip('/')  # 移除末尾可能存在的斜杠 -> 有一次训练过程中暴雷了很诡异🤔
         # 仅保留图片文件（不区分大小写）
         self.datalist = [
             f for f in os.listdir(self.dir) 
