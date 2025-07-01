@@ -12,9 +12,9 @@ from tqdm import tqdm
 import multiprocessing
 
 
-img_dim = 64
+img_dim = 128
 lr = 0.0002
-epochs = 5
+epochs = 10
 batch_size = 128
 G_DIMENSION = 100
 beta1 = 0.5
@@ -34,7 +34,7 @@ def main():
 
     # 定义损失函数和优化器
     criterion = nn.BCELoss()
-    optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, beta2),weight_decay=1e-5)
+    optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, beta2),weight_decay=1e-4) # 降低判别器的强度，不然生成器很难学习🤔
     optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, beta2),weight_decay=1e-6) # 更弱的正则化
 
     # 训练过程

@@ -6,15 +6,15 @@ from PIL import ImageFile
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-"""多线程将图片缩放后再裁切到64*64分辨率"""
+"""多线程将图片缩放后再裁切到128^2分辨率"""
 # 裁切图片宽度
-w = 64
+w = 128
 # 裁切图片高度
-h = 64
+h = 128
 # 裁切点横坐标(以图片左上角为原点)
 x = 0
 # 裁切点纵坐标
-y = 20
+y = 0  # 建议从顶部开始裁切
 
 
 def cutArray(l, num):
@@ -31,10 +31,10 @@ def cutArray(l, num):
 
 def convertjpg(jpgfile, outdir, width=w, height=h):
     img = Image.open(jpgfile)
-    (l, h) = img.size
-    rate = min(l, h) / width
+    (l, h_img) = img.size
+    rate = min(l, h_img) / width
     try:
-        img = img.resize((int(l // rate), int(h // rate)), Image.BILINEAR)
+        img = img.resize((int(l // rate), int(h_img // rate)), Image.BILINEAR)
         img = img.crop((x, y, width + x, height + y))
         img.save(os.path.join(outdir, os.path.basename(jpgfile)))
     except Exception as e:
