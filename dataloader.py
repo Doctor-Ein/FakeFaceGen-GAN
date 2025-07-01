@@ -1,5 +1,5 @@
 import os
-import cv2
+# import cv2
 import numpy as np
 from skimage import io, transform
 import matplotlib.pyplot as plt
@@ -57,7 +57,7 @@ train_loader = DataLoader(
     batch_size=128,
     shuffle=True,
     num_workers=2,
-    pin_memory=True,  # 使用 pin_memory 可以加速数据传输
+    pin_memory=False,  # 使用 pin_memory 可以加速数据传输
     drop_last=True,
 )
 
